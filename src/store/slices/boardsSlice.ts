@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { IBoard } from "../../types";
+import type { IBoard, IList, ITask } from "../../types";
 
 type TBoardsState = {
     modalActive: boolean;
@@ -15,12 +15,23 @@ type TDeleteListAction = {
     listId: string;
 }
 
+type TAddListAction = {
+    boardId: string;
+    list: IList;
+}
+
+type TAddTaskAction = {
+    boardId: string;
+    listId: string;
+    task: ITask;
+}
+
 const initialState : TBoardsState = {
     modalActive: false,
     boardArray: [
         {
             boardId: 'board-0',
-            boardName: "천 번쨰 게시물",
+            boardName: "첫 번째 게시물",
             lists: [
                 {
                     listId: "list-0",  
@@ -65,6 +76,31 @@ const boardsSlice = createSlice({
             state.boardArray.push(payload.board);
         },
 
+        addList: (state, {payload} : PayloadAction<TAddListAction>) => {
+            state.boardArray.map(board =>
+                board.boardId === payload.boardId
+                ? {...board, lists: board.lists.push(payload.list)}
+                : board
+            )
+        },
+
+        addTask: (state, {payload} : PayloadAction<TAddTaskAction>) => {
+            state.boardArray.map(board =>
+                board.boardId === payload.boardId
+                ? {
+                    ...board,
+                    list: board.lists.map(list =>
+                        list.listId === payload.listId
+                        ? {
+                            ...list, 
+                            tasks: list.tasks.push(payload.task)
+                        }
+                        : list
+                    )
+                } : board
+            )
+        },
+
         deleteList: (state, {payload} : PayloadAction<TDeleteListAction>) => {
             state.boardArray = state.boardArray.map(
                 board => 
@@ -89,5 +125,5 @@ const boardsSlice = createSlice({
     }
 })
 
-export const {addBoard, deleteList, setModalActive} = boardsSlice.actions;
+export const {addBoard, deleteList, setModalActive, addTask, addList} = boardsSlice.actions;
 export const boardsReducer = boardsSlice.reducer;
