@@ -1,4 +1,4 @@
-import React, { useState, type FC } from 'react'
+import React, { useRef, useState, type FC } from 'react'
 import { useTypedSelector } from '../../hooks/redux'
 import { FiPlusCircle } from 'react-icons/fi';
 import SideForm from './SideForm/SideForm';
@@ -16,6 +16,14 @@ const BoardList: FC<TBoardListProps> = ({
 
   const {boardArray} = useTypedSelector(state => state.boards)
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  
+  const handleClick = () => {
+    setIsFormOpen(!isFormOpen);
+    setTimeout(()=>{
+      inputRef.current?.focus();
+    }, 0); //타임 아웃을 0으로 설정하여 다음 이벤트 루프에서 포커스가 적용되도록 함
+  };
 
   return (
     <div className={container}>
@@ -46,9 +54,9 @@ const BoardList: FC<TBoardListProps> = ({
       <div className={addSection}>
         {
         isFormOpen ? 
-          <SideForm setIsFormOpen={setIsFormOpen} /> 
+          <SideForm inputRef={inputRef} setIsFormOpen={setIsFormOpen} /> 
           :
-          <FiPlusCircle className={addButton} onClick={() => setIsFormOpen(!isFormOpen)}/>
+          <FiPlusCircle className={addButton} onClick={handleClick}/>
         }
       </div>
     </div>
