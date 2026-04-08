@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  apiKey: "AIzaSyDk1DrQdDPTiAB43Hw1rY_TIuLH4NUdvo0",
+  authDomain: "trello-clone-b1b07.firebaseapp.com",
+  projectId: "trello-clone-b1b07",
+  storageBucket: "trello-clone-b1b07.firebasestorage.app",
+  messagingSenderId: "493312588181",
+  appId: "1:493312588181:web:3d64f926195295873b1e9c"
 };
 
 // Initialize Firebase
