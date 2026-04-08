@@ -1,4 +1,4 @@
-import React, { useState, type ChangeEvent, type FC } from 'react'
+import { useState, type ChangeEvent, type FC } from 'react'
 import { FiX } from 'react-icons/fi';
 import { useTypedDispatch } from '../../../hooks/redux';
 import { v4 } from 'uuid';

@@ -1,4 +1,4 @@
-import React, { type FC } from 'react'
+import { type FC } from 'react'
 import { FiX } from 'react-icons/fi';
 import LogItem from './LogItem/LogItem';
 import { useTypedSelector } from '../../hooks/redux';
